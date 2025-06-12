@@ -12,7 +12,13 @@ const Header = () => (
 
 const ColorCard = ({ color, selected, onSelect, winPercent, coinCount }) => (
   <div
-    className={\`cursor-pointer p-4 rounded-2xl shadow-md transition-all text-white text-center font-semibold text-lg \${color === "Red" ? "bg-red-500" : color === "Blue" ? "bg-blue-500" : "bg-green-500"} \${selected ? "ring-4 ring-yellow-300" : "hover:opacity-90"}\`}
+    className={`cursor-pointer p-4 rounded-2xl shadow-md transition-all text-white text-center font-semibold text-lg ${
+      color === "Red"
+        ? "bg-red-500"
+        : color === "Blue"
+        ? "bg-blue-500"
+        : "bg-green-500"
+    } ${selected ? "ring-4 ring-yellow-300" : "hover:opacity-90"}`}
     onClick={() => onSelect(color)}
   >
     {color}
@@ -47,7 +53,10 @@ const GamePage = () => {
       <div className="flex justify-between text-gray-600 text-sm mb-4">
         <div>👥 Online Users: 23</div>
         <div>🎯 Round #{round}</div>
-        <div>⏳ Time Left: {Math.floor(timer / 60)}:{String(timer % 60).padStart(2, '0')}</div>
+        <div>
+          ⏳ Time Left: {Math.floor(timer / 60)}:
+          {String(timer % 60).padStart(2, "0")}
+        </div>
       </div>
 
       <div className="grid grid-cols-3 gap-4 mb-6">
@@ -70,7 +79,11 @@ const GamePage = () => {
             <button
               key={s}
               onClick={() => setStake(s)}
-              className={\`px-4 py-2 rounded-full border \${stake === s ? "bg-yellow-300 text-black font-bold" : "bg-white hover:bg-gray-200"}\`}
+              className={`px-4 py-2 rounded-full border ${
+                stake === s
+                  ? "bg-yellow-300 text-black font-bold"
+                  : "bg-white hover:bg-gray-200"
+              }`}
             >
               {s} 💰
             </button>
@@ -80,9 +93,15 @@ const GamePage = () => {
 
       <button
         disabled={!selectedColor}
-        className={\`w-full py-3 text-lg font-bold rounded-xl transition-all \${selectedColor ? "bg-indigo-600 hover:bg-indigo-700 text-white" : "bg-gray-300 cursor-not-allowed"}\`}
+        className={`w-full py-3 text-lg font-bold rounded-xl transition-all ${
+          selectedColor
+            ? "bg-indigo-600 hover:bg-indigo-700 text-white"
+            : "bg-gray-300 cursor-not-allowed"
+        }`}
       >
-        {selectedColor ? \`Submit (\${stake} on \${selectedColor})\` : "Select a color to play"}
+        {selectedColor
+          ? `Submit (${stake} on ${selectedColor})`
+          : "Select a color to play"}
       </button>
     </div>
   );
@@ -107,7 +126,9 @@ const RulesPage = () => (
 const HistoryPage = () => (
   <div className="max-w-3xl p-6 mx-auto text-gray-700">
     <h2 className="text-2xl font-bold mb-4">📜 History</h2>
-    <p className="mb-2 font-semibold">(This section can be expanded with tabs and actual history data.)</p>
+    <p className="mb-2 font-semibold">
+      (This section can be expanded with tabs and actual history data.)
+    </p>
     <ul className="space-y-2">
       <li>🎲 Round 14 - Winning Color: Blue - Your Stake: 0.5 - Win</li>
       <li>🎲 Round 13 - Winning Color: Red - Your Stake: 1 - Loss</li>
@@ -120,9 +141,15 @@ export default function App() {
     <Router>
       <Header />
       <nav className="bg-gray-100 text-center p-2 space-x-4">
-        <Link to="/" className="text-indigo-600 font-semibold">Game</Link>
-        <Link to="/how-to-play" className="text-indigo-600 font-semibold">How to Play</Link>
-        <Link to="/history" className="text-indigo-600 font-semibold">History</Link>
+        <Link to="/" className="text-indigo-600 font-semibold">
+          Game
+        </Link>
+        <Link to="/how-to-play" className="text-indigo-600 font-semibold">
+          How to Play
+        </Link>
+        <Link to="/history" className="text-indigo-600 font-semibold">
+          History
+        </Link>
       </nav>
       <Routes>
         <Route path="/" element={<GamePage />} />
